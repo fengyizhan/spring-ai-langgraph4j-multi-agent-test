@@ -1,8 +1,8 @@
-package com.zj.ai.study.service.config;
+package com.hd.service.config;
 
-import com.zj.ai.study.domain.dto.AnalysisTaskState;
-import com.zj.ai.study.service.agent.*;
-import com.zj.ai.study.service.edge.RetryEdgeAction;
+import com.hd.domain.dto.AnalysisTaskState;
+import com.hd.service.agent.*;
+import com.hd.service.edge.RetryEdgeAction;
 import org.bsc.langgraph4j.CompiledGraph;
 import org.bsc.langgraph4j.GraphStateException;
 import org.bsc.langgraph4j.StateGraph;

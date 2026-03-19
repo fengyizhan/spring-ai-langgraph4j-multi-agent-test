@@ -1,6 +1,6 @@
-package com.zj.ai.study.service;
+package com.hd.service;
 
-import com.zj.ai.study.domain.entity.Order;
+import com.hd.domain.entity.Order;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

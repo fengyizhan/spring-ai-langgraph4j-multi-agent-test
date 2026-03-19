@@ -1,4 +1,4 @@
-package com.zj.ai.study;
+package com.hd;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

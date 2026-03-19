@@ -1,4 +1,4 @@
-package com.zj.ai.study.domain.entity;
+package com.hd.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

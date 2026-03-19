@@ -1,5 +1,5 @@
-import com.zj.ai.study.MutilAgentApplication;
-import com.zj.ai.study.domain.dto.AnalysisTaskState;
+import com.hd.MutilAgentApplication;
+import com.hd.domain.dto.AnalysisTaskState;
 import jakarta.transaction.Transactional;
 import org.bsc.langgraph4j.CompiledGraph;
 import org.junit.jupiter.api.Test;

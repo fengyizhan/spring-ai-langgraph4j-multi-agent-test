@@ -1,6 +1,6 @@
-package com.zj.ai.study.service.agent;
+package com.hd.service.agent;
 
-import com.zj.ai.study.domain.dto.AnalysisTaskState;
+import com.hd.domain.dto.AnalysisTaskState;
 import lombok.extern.slf4j.Slf4j;
 import org.bsc.langgraph4j.action.NodeAction;
 import org.springframework.ai.chat.model.ChatModel;

@@ -1,6 +1,6 @@
-package com.zj.ai.study.service.edge;
+package com.hd.service.edge;
 
-import com.zj.ai.study.domain.dto.AnalysisTaskState;
+import com.hd.domain.dto.AnalysisTaskState;
 import org.bsc.langgraph4j.action.EdgeAction;
 import org.springframework.stereotype.Component;
 

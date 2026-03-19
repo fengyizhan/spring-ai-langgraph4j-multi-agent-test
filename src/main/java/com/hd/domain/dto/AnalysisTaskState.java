@@ -1,6 +1,6 @@
-package com.zj.ai.study.domain.dto;
+package com.hd.domain.dto;
 
-import com.zj.ai.study.utils.JSONUtils;
+import com.hd.utils.JSONUtils;
 import lombok.Getter;
 import lombok.Setter;
 import org.bsc.langgraph4j.state.AgentState;

@@ -1,4 +1,4 @@
-package com.zj.ai.study.utils;
+package com.hd.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
