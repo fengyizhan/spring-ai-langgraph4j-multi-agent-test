@@ -34,9 +34,9 @@ public class DataAnalysisAgent implements NodeAction<AnalysisTaskState> {
                 %s
                 
                 请完成以下分析：
-                1. 找出%s排名前3的%s；
-                2. 计算前3名的总%s占比；
-                3. 分析前3名领先的可能原因（结合电商行业常识）；
+                1. 找出%s排名前4的%s；
+                2. 计算前4名的总%s占比；
+                3. 分析前4名领先的可能原因（结合电商行业常识）；
                 4. 结论简洁明了，分点说明（不要超过500字）。
                 
                 用户原始需求：%s

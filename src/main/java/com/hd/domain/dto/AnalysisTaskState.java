@@ -27,6 +27,7 @@ public class AnalysisTaskState extends AgentState {
     // 最终结果
     private String finalReport;        // 校验通过的最终报告
     private boolean needRetry;        // 是否需要重试（结果校验失败时为 true）
+    private boolean humanConfirmed;   // 人工确认状态
 
     public AnalysisTaskState() {
         super(new HashMap<>());
@@ -34,7 +35,7 @@ public class AnalysisTaskState extends AgentState {
 
     public AnalysisTaskState(String userQuery, String timeRange, String targetIndicator,
             String analysisDimension, String rawData, String analysisResult, String reportDraft, String finalReport,
-            boolean needRetry) {
+            boolean needRetry, boolean humanConfirmed) {
         super(new HashMap<>());
         this.userQuery = userQuery;
         this.timeRange = timeRange;
@@ -45,6 +46,7 @@ public class AnalysisTaskState extends AgentState {
         this.reportDraft = reportDraft;
         this.finalReport = finalReport;
         this.needRetry = needRetry;
+        this.humanConfirmed = humanConfirmed;
     }
 
     public AnalysisTaskState(Map<String, Object> data) {
@@ -63,6 +65,7 @@ public class AnalysisTaskState extends AgentState {
         this.reportDraft = oldState.getReportDraft();
         this.finalReport = oldState.getFinalReport();
         this.needRetry = oldState.isNeedRetry();
+        this.humanConfirmed = oldState.isHumanConfirmed();
     }
 
     public Map<String, Object> toMap() {
@@ -107,6 +110,11 @@ public class AnalysisTaskState extends AgentState {
 
     public AnalysisTaskState withNeedRetry(boolean needRetry) {
         this.setNeedRetry(needRetry);
+        return this;
+    }
+
+    public AnalysisTaskState withHumanConfirmed(boolean humanConfirmed) {
+        this.setHumanConfirmed(humanConfirmed);
         return this;
     }
 }
