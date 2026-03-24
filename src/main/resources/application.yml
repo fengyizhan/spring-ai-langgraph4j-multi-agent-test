@@ -10,8 +10,9 @@ spring:
       api-key: ${DASHSCOPE_API_KEY}
       chat:
         options:
-          model: qwen-turbo
+          model: qwen-plus
           temperature: 0.7
+          #qwen-turbo 基础版本不支持联网搜索，需要使用 qwen-turbo-latest 或 qwen-plus 等版本。
           enable-search: true
       embedding:
         options:
@@ -19,8 +20,10 @@ spring:
 
 
 # 日志配置（便于调试流程）
+
 logging:
   level:
+    root: DEBUG
     org.langchain4j: DEBUG
     com.example: DEBUG
 

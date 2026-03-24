@@ -1,5 +1,6 @@
 package com.hd.service.config;
 
+import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatOptions;
 import com.hd.domain.dto.AnalysisTaskState;
 import com.hd.service.agent.*;
 import com.hd.service.edge.HumanConfirmEdgeAction;
@@ -8,6 +9,9 @@ import org.bsc.langgraph4j.CompiledGraph;
 import org.bsc.langgraph4j.GraphStateException;
 import org.bsc.langgraph4j.StateGraph;
 import org.bsc.langgraph4j.action.AsyncEdgeAction;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,6 +26,9 @@ import static org.bsc.langgraph4j.action.AsyncNodeAction.node_async;
  */
 @Configuration
 public class AgentWorkflowConfig {
+
+    @Autowired
+    private ChatModel chatModel;
 
     @Bean
     public CompiledGraph<AnalysisTaskState> analysisWorkflow(
@@ -78,5 +85,14 @@ public class AgentWorkflowConfig {
         );
 
         return graphBuilder.compile();
+    }
+
+    @Bean("dataAnalysisClient")
+    public ChatClient chatClent(ChatModel chatModel) {
+        // 调用 AI 模型获取分析结果（显式启用联网搜索）
+//        DashScopeChatOptions options = DashScopeChatOptions.builder()
+//                .withEnableSearch(true)
+//                .build();
+        return ChatClient.builder(chatModel).build();
     }
 }

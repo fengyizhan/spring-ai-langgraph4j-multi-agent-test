@@ -1,9 +1,13 @@
 package com.hd.service.agent;
 
+import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatOptions;
 import com.hd.domain.dto.AnalysisTaskState;
 import lombok.extern.slf4j.Slf4j;
 import org.bsc.langgraph4j.action.NodeAction;
+import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -16,10 +20,10 @@ import java.util.Map;
 @Slf4j
 public class DataAnalysisAgent implements NodeAction<AnalysisTaskState> {
 
-    private final ChatModel chatModel;
+    private final ChatClient dataAnalysisClient;
 
-    public DataAnalysisAgent(ChatModel chatModel) {
-        this.chatModel = chatModel;
+    public DataAnalysisAgent(@Qualifier("dataAnalysisClient") ChatClient dataAnalysisClient) {
+        this.dataAnalysisClient = dataAnalysisClient;
     }
 
     public AnalysisTaskState analyze(AnalysisTaskState state) {
@@ -42,8 +46,8 @@ public class DataAnalysisAgent implements NodeAction<AnalysisTaskState> {
                 用户原始需求：%s
                 """, targetIndicator, analysisDimension, rawData, targetIndicator, analysisDimension, targetIndicator, userQuery);
 
-        // 调用 AI 模型获取分析结果
-        String analysisResult = chatModel.call(prompt);
+
+        String analysisResult = dataAnalysisClient.prompt().user(prompt).call().content();
         log.info("数据分析结论：" + analysisResult);
 
         return state.withAnalysisResult(analysisResult);
