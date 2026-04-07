@@ -23,7 +23,7 @@ spring:
 
 logging:
   level:
-    root: DEBUG
+#    root: DEBUG
     org.langchain4j: DEBUG
     com.example: DEBUG
 

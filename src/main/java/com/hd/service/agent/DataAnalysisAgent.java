@@ -1,16 +1,15 @@
 package com.hd.service.agent;
 
-import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatOptions;
 import com.hd.domain.dto.AnalysisTaskState;
 import lombok.extern.slf4j.Slf4j;
-import org.bsc.langgraph4j.action.NodeAction;
+import org.bsc.langgraph4j.RunnableConfig;
+import org.bsc.langgraph4j.action.AsyncNodeActionWithConfig;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.model.ChatModel;
-import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 
 /**
@@ -18,7 +17,7 @@ import java.util.Map;
  */
 @Component
 @Slf4j
-public class DataAnalysisAgent implements NodeAction<AnalysisTaskState> {
+public class DataAnalysisAgent implements AsyncNodeActionWithConfig<AnalysisTaskState> {
 
     private final ChatClient dataAnalysisClient;
 
@@ -26,7 +25,11 @@ public class DataAnalysisAgent implements NodeAction<AnalysisTaskState> {
         this.dataAnalysisClient = dataAnalysisClient;
     }
 
-    public AnalysisTaskState analyze(AnalysisTaskState state) {
+    public AnalysisTaskState analyze(AnalysisTaskState state, RunnableConfig config) {
+        // 从config中获取userId
+        String userId = (String) config.metadata("userId").orElse("anonymous");
+        log.info("用户 {} 正在执行数据分析", userId);
+        
         String userQuery = state.getUserQuery();
         String rawData = state.getRawData();
         String targetIndicator = state.getTargetIndicator();
@@ -55,8 +58,8 @@ public class DataAnalysisAgent implements NodeAction<AnalysisTaskState> {
 
 
     @Override
-    public Map<String, Object> apply(AnalysisTaskState analysisTaskState) throws Exception {
-        AnalysisTaskState result = this.analyze(analysisTaskState);
-        return result.toMap();
+    public CompletableFuture<Map<String, Object>> apply(AnalysisTaskState state, RunnableConfig config) {
+        AnalysisTaskState result = this.analyze(state, config);
+        return CompletableFuture.completedFuture(result.toMap());
     }
 }

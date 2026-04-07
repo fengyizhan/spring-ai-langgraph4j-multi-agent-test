@@ -2,6 +2,7 @@ package com.hd;
 
 import com.hd.domain.dto.AnalysisTaskState;
 import org.bsc.langgraph4j.CompiledGraph;
+import org.bsc.langgraph4j.RunnableConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 
@@ -23,9 +24,15 @@ public class WorkflowRunner {
         AnalysisTaskState initialState = new AnalysisTaskState();
         initialState.setUserQuery(userQuery);
         
+        // 构造运行配置（传递用户身份等参数）
+        RunnableConfig config = RunnableConfig.builder()
+                .threadId("thread-" + System.currentTimeMillis())  // 流程实例ID
+                .addMetadata("userId", "user_10086")               // 用户ID
+                .build();
+        
         // 执行工作流（会在HumanConfirmAgent处阻塞等待输入）
         System.out.println("\n==================== 开始执行多智能体流程 ====================");
-        AnalysisTaskState finalState = workflow.invoke(initialState.toMap())
+        AnalysisTaskState finalState = workflow.invoke(initialState.toMap(), config)
                 .orElse(new AnalysisTaskState());
         
         // 输出最终报告

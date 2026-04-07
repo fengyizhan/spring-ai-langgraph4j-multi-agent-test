@@ -49,7 +49,7 @@ public class AgentWorkflowConfig {
         // 2. 添加节点（每个智能体对应一个节点）
         graphBuilder.addNode("decompose", node_async(decompositionAgent)); // 任务拆解
         graphBuilder.addNode("query", node_async(dataQueryAgent)); // 数据查询
-        graphBuilder.addNode("analyze", node_async(dataAnalysisAgent)); // 数据分析
+        graphBuilder.addNode("analyze", dataAnalysisAgent); // 数据分析
         graphBuilder.addNode("generateReport", node_async(reportGenerationAgent)); // 报告生成
         graphBuilder.addNode("humanConfirm", node_async(humanConfirmAgent)); // 人工介入节点
         graphBuilder.addNode("validate", node_async(validationAgent)); // 结果校验
